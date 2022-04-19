@@ -4,6 +4,7 @@ import { MainContainerComponent } from './components/main-container/main-contain
 import { ChatRoomComponent } from './components/chat-room/chat-room.component';
 import { ChatDefaultPageComponent } from './components/chat-default-page/chat-default-page.component';
 import { LoginComponent } from './components/login/login.component';
+import { ChatGuard } from './guards/chat.guard';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
         path: '',
         component: ChatDefaultPageComponent
       }
-    ]
+    ],
+    canActivate: [ChatGuard]
   },
   {
     path: 'login',

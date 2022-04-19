@@ -1,1 +1,14 @@
-<p>chat-room works!</p>
+<div class="chat__area">
+  <ng-container>
+    <div class="chat__area__message" [ngClass]="{'chat__area__message__owner': true }">
+<!--      isUser.uid === m.user.id-->
+      <span class="chat__area__message__name">John Dou</span>
+      <span class="chat__area__message__text">Hello</span>
+      <span class="chat__area__message__time">10.40pm</span>
+    </div>
+  </ng-container>
+
+  <ng-template>
+    <h1 style="text-align: center">No Messages</h1>
+  </ng-template>
+</div>
