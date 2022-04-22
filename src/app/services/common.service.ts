@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
-import firebase from 'firebase/compat';
+import firebase from 'firebase/compat/app';
 import User = firebase.User;
 import { Router } from '@angular/router';
 import auth = firebase.auth;

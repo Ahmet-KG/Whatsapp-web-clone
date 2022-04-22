@@ -1,0 +1,17 @@
+.login {
+  display: grid;
+  place-items: center;
+  height: 100%;
+
+  & > img {
+    height:60%;
+  }
+
+  & > button {
+    margin-bottom: 3rem;
+  }
+
+  button img {
+    width:300px;
+  }
+}
