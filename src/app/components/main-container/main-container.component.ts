@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-container.component.scss']
 })
 export class MainContainerComponent implements OnInit {
+  seedValue!: string;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+    seedData(ev: string) {
+    this.seedValue = ev;
+    }
 }

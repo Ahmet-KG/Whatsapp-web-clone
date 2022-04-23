@@ -35,8 +35,8 @@
   </div>
 
   <div class="sidebar__content">
-    <ng-container>
-      <app-sidebar-content></app-sidebar-content>
+    <ng-container *ngFor="let r of roomData; let i = index">
+      <app-sidebar-content [roomData]="r" [randomSeed]="randomSeed[i]" (seedValue)="seedData($event)"></app-sidebar-content>
     </ng-container>
   </div>
 </section>

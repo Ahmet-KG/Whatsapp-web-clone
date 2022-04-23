@@ -8,6 +8,11 @@ import { Router } from '@angular/router';
 import auth = firebase.auth;
 import UserCredential = firebase.auth.UserCredential;
 
+export interface RoomData {
+  name: string;
+  id?: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -53,8 +58,10 @@ export class CommonService {
     })
   }
 
-  updatePathParamState(newPathParam: string) {
-    this.pathParamState.next(newPathParam);
+  updatePathParamState(newPathParam: string | null) {
+    if (newPathParam != null) {
+      this.pathParamState.next(newPathParam);
+    }
   }
 
   getUser(): User {
