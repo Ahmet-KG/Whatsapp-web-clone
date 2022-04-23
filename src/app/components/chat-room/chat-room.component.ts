@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonService } from '../../services/common.service';
 import { ActivatedRoute } from '@angular/router';
 import { map, Subscription } from 'rxjs';
@@ -12,8 +12,12 @@ import User = firebase.User;
   styleUrls: ['./chat-room.component.scss']
 })
 export class ChatRoomComponent implements OnInit, OnDestroy {
-  subs!: Subscription;
+  @Output() chatData: EventEmitter<any> = new EventEmitter<any>()
+
+  subs: Subscription[] = [];
   isUser!: User;
+  item: any;
+  messageData: any[] = [];
 
   constructor(private commonService: CommonService,
               private route: ActivatedRoute,
@@ -22,15 +26,26 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-   this.subs = this.route.paramMap
+   this.subs.push(this.route.paramMap
       .pipe(
         map(paramMap => paramMap.get('id'))
       )
-      .subscribe(routePathParam =>this.commonService.updatePathParamState(routePathParam));
+      .subscribe(routePathParam =>this.commonService.updatePathParamState(routePathParam)));
+
+   this.subs.push(
+     this.route.params.subscribe(par => {
+       this.afs.collection('rooms').doc(par['id']).get().subscribe(data => {
+         this.item = data;
+         this.chatData.emit(this.item.data().name)
+       });
+       this.subs.push(this.afs.collection('rooms').doc(par['id'])
+         .collection('messages', ref => ref.orderBy('time', 'asc'))
+         .valueChanges().subscribe(messages => this.messageData = messages));
+     })
+   )
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    this.subs.map(s => s.unsubscribe());
   }
-
 }

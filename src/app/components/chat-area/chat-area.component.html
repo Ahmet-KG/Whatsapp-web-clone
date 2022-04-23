@@ -2,7 +2,7 @@
   <div class="chat__header">
     <img src="https://avatars.dicebear.com/api/human/abcdf{{ randomSeed }}.svg" alt="avatar" mat-card-avatar>
     <div class="chat__header__room-name">
-      <h4>{{ 'ROOM NAME' }}</h4>
+      <h4>{{ roomName || 'ROOM NAME' }}</h4>
     </div>
     <div class="chat__header__right">
       <button mat-icon-button>
@@ -18,7 +18,7 @@
   </div>
 
   <div class="chat__body">
-    <router-outlet></router-outlet>
+    <router-outlet (activate)="chatData($event)"></router-outlet>
   </div>
 
   <div class="chat__footer">
@@ -29,7 +29,7 @@
     <form #form='ngForm' (ngSubmit)="formSubmit(form)">
       <input type="text" ngModel=""
              name="message" placeholder="Type a message"
-             class="chat__footer__send-message">
+             class="chat__footer__send-message" required>
       <button type="submit" style="display: none"></button>
     </form>
 

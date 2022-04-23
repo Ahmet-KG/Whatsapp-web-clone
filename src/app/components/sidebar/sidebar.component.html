@@ -12,7 +12,7 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Logout</button>
+        <button mat-menu-item (click)="logOut()">Logout</button>
       </mat-menu>
     </div>
   </div>
@@ -22,12 +22,9 @@
   <div class="sidebar__search">
     <div class="sidebar__search__content">
       <form #form='ngForm' (ngSubmit)="onFormSubmit(form)">
-        <button mat-icon-button class="sidebar__search__content__icon">
-          <mat-icon>search_outline</mat-icon>
-        </button>
         <input type="text"
                class="sidebar__search__content__input"
-               name="search" ngModel=""
+               name="search" ngModel
                placeholder="Search or start new chat">
         <button type="submit" style="display: none"></button>
       </form>

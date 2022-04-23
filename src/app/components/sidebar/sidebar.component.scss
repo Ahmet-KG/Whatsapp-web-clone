@@ -42,14 +42,6 @@
       width:fit-content;
       position:relative;
 
-      &__icon {
-        position: absolute;
-        top:-5px;
-        left:0;
-        color:#ccc;
-        font-size: 14px;
-      }
-
       &__input {
         border:1px solid lightgray;
         width: 380px;
@@ -64,12 +56,10 @@
 
       }
     }
-
-
   }
 
   &__content {
     overflow-y: scroll;
-    flex:1;
+    flex: 1;
   }
 }

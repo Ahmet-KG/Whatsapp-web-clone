@@ -18,6 +18,7 @@ export class ChatAreaComponent implements OnInit {
   @Input() randomSeed!: string;
   subs!: Subscription;
   paramValue!: string;
+  roomName!: string
 
   constructor(private commonService: CommonService,
               private afs: AngularFirestore) { }
@@ -32,7 +33,7 @@ export class ChatAreaComponent implements OnInit {
     }
     const {message} = form.value;
     form.resetForm();
-    this.afs.collection('rooms').doc(this.paramValue).collection('message').add({
+    this.afs.collection('rooms').doc(this.paramValue).collection('messages').add({
       message,
       user_id: this.commonService.getUser().uid,
       name: this.commonService.getUser().displayName,
@@ -40,4 +41,10 @@ export class ChatAreaComponent implements OnInit {
     })
 
   }
+
+    chatData(e: any) {
+        if (e.chatData != undefined) {
+          e.chatData.subscribe((roomName: string) => this.roomName = roomName)
+        }
+    }
 }
